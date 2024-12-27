@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -21,5 +22,17 @@ class UserService
         $user->email = $nuovaEmail;
         $user->oresettimanali = $nuoveOre;
         $user->save();
+    }
+
+    public function inserisciUser($request)
+    {
+        User::create([
+            'name' => $request->name,
+            'role' => 0,
+            'email' => $request->email,
+            'oresettimanali' => $request->oresettimanali,
+            'oresaldo' => 0,
+            'password' => Hash::make($request->password)
+        ]);
     }
 }

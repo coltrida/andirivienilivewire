@@ -7,13 +7,18 @@ use Livewire\Component;
 
 class InserisciVettura extends Component
 {
+    public $nomeVettura;
 
+    public function inserisci(CarService $carService)
+    {
+        $carService->inserisci($this->nomeVettura);
+    }
 
     public function elimina(CarService $carService, $id)
     {
-        $userService->eliminaUser($id);
-        session()->flash('status', 'Utente eliminato');
-        $this->redirectRoute('lista-operatori', navigate: true);
+        $carService->elimina($id);
+        session()->flash('status', 'vettura eliminata');
+        $this->redirectRoute('car-inserisci', navigate: true);
     }
 
     public function render(CarService $carService)

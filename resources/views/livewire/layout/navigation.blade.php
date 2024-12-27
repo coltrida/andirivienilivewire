@@ -37,9 +37,9 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('lista-operatori')" wire:navigate>
+                        {{--<x-dropdown-link :href="route('lista-operatori')" wire:navigate>
                             Lista Operatori
-                        </x-dropdown-link>
+                        </x-dropdown-link>--}}
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
@@ -65,11 +65,11 @@ new class extends Component
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        {{--<div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('lista-operatori')" :active="request()->routeIs('dashboard')" wire:navigate>
                 Lista Operatori
             </x-responsive-nav-link>
-        </div>
+        </div>--}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

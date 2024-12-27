@@ -28,6 +28,7 @@ class ModificaUser extends Component
 
     public function render()
     {
-        return view('livewire.user.modifica-user')->title('modifica user');
+        return view('livewire.user.modifica-user')
+            ->title('modifica user');
     }
 }
