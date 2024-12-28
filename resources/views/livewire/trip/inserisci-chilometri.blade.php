@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form wire:submit="inserisci">
+
         <div class="grid gap-6 mb-6 md:grid-cols-7">
             <div class="md:col-span-1">
                 <select wire:model="car_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -43,32 +43,39 @@
                 <input wire:model="giorno" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
             </div>
 
-            <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover" class="text-white bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-700 dark:focus:ring-blue-800" type="button">Passengeri <svg class="w-2.5 h-2.5 ms-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
-            </button>
-
-            <!-- Dropdown menu -->
-            <div id="dropdownBgHover" class="z-10 hidden w-48 bg-white rounded-lg shadow dark:bg-gray-700">
-                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
-                    @foreach($listaRagazzi as $client)
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-4" wire:model="clients" type="checkbox" value="{{$client->id}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                            <label for="checkbox-item-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{$client->name}}</label>
+            <div x-data="{ open: false }">
+                <!-- Finestra fissa -->
+                <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+                    <div class="bg-black rounded-lg w-96 h-72 overflow-hidden shadow-lg">
+                        <!-- Header della finestra -->
+                        <div class="flex justify-between items-center p-4 border-b">
+                            <h2 class="text-lg font-semibold">Lista Ragazzi</h2>
+                            <button @click="open = false" class="text-red-500">Chiudi</button>
                         </div>
-                    </li>
-                    @endforeach
-                </ul>
+
+                        <!-- Lista con scorrimento -->
+                        <div class="p-4 overflow-y-auto h-56">
+                            <ul>
+                                @foreach($listaRagazzi as $client)
+                                    <div class="flex items-center mb-4">
+                                        <input wire:model="clients" id="default-checkbox-{{$client->id}}" type="checkbox" value="{{$client->id}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-checkbox-{{$client->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$client->name}}</label>
+                                    </div>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button @click="open = true" class="bg-blue-500 text-white px-4 py-2 rounded">Sel. Ragazzi</button>
             </div>
 
             <div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button wire:click="inserisci" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Inserisci
                 </button>
             </div>
         </div>
-    </form>
+
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-4">

@@ -23,6 +23,42 @@ class ClientSeeder extends Seeder
             [
                 'name' => 'topolino'
             ],
+            [
+                'name' => 'pippo1'
+            ],
+            [
+                'name' => 'pluto1'
+            ],
+            [
+                'name' => 'topolino1'
+            ],
+            [
+                'name' => 'pippo2'
+            ],
+            [
+                'name' => 'pluto2'
+            ],
+            [
+                'name' => 'topolino2'
+            ],
+            [
+                'name' => 'pippo5'
+            ],
+            [
+                'name' => 'pluto5'
+            ],
+            [
+                'name' => 'topolino5'
+            ],
+            [
+                'name' => 'pippo6'
+            ],
+            [
+                'name' => 'pluto6'
+            ],
+            [
+                'name' => 'topolino6'
+            ],
         ]);
     }
 }

@@ -31,6 +31,9 @@ class InserisciChilometri extends Component
         $request->kmPercorsi = (int) $this->km_finali - (int) $this->km_iniziali;
         $request->clients = $this->clients;
         $tripService->inserisciViaggio($request);
+
+        $this->reset('car_id', 'user_id', 'km_iniziali', 'km_finali', 'giorno');
+        $this->clients = [];
     }
 
     public function render(TripService $tripService, CarService $carService, UserService $userService, ClientService $clientService)

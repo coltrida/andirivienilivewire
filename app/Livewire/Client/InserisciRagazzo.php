@@ -29,7 +29,7 @@ class InserisciRagazzo extends Component
     public function render(ClientService $clientService)
     {
         return view('livewire.client.inserisci-ragazzo', [
-            'listaRagazzi' => $clientService->listaRagazzi()
+            'listaRagazzi' => $clientService->listaRagazziPaginate()
         ])
             ->title('inserisci ragazzo');
     }
