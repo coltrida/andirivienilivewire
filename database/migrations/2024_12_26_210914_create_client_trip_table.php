@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Client::class);
             $table->foreignIdFor(\App\Models\Trip::class)->constrained()->onDelete('cascade');
-            $table->integer('mese');
-            $table->integer('anno');
             $table->timestamps();
         });
     }

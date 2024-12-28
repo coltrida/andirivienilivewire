@@ -20,6 +20,9 @@ Route::middleware(['auth'])->group(function () {
 
     //------------------- ATTIVITA ----------------------//
     Route::get('/inserisciAttivita', \App\Livewire\Activity\InserisciAttivita::class)->name('activity-inserisci');
+
+    //------------------- TRIP ----------------------//
+    Route::get('/inserisciChilometri', \App\Livewire\Trip\InserisciChilometri::class)->name('viaggio-inserisci');
 });
 
 

@@ -26,6 +26,11 @@ class PresenzeOperatori extends Component
         $this->reset('ore');
     }
 
+    public function eliminaPresenza(PresenzaService $presenzaService, $idPresenza)
+    {
+        $presenzaService->eliminaPresenza($idPresenza);
+    }
+
     public function render(PresenzaService $presenzaService)
     {
         return view('livewire.user.presenze-operatori', [
