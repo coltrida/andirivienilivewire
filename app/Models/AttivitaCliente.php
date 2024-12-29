@@ -8,4 +8,6 @@ class AttivitaCliente extends Model
 {
     protected $table = 'activities_clients';
     protected $guarded = [];
+
+
 }

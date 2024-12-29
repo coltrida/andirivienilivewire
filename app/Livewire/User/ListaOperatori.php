@@ -22,10 +22,7 @@ class ListaOperatori extends Component
         $request->password = $this->password;
         $userService->inserisciUser($request);
 
-        $this->reset('name');
-        $this->reset('email');
-        $this->reset('oresettimanali');
-        $this->reset('password');
+        $this->reset('name', 'email', 'oresettimanali', 'password');
     }
 
     public function eliminaUser(UserService $userService, $id)

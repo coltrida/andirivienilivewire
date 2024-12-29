@@ -24,12 +24,14 @@ class InserisciRagazzo extends Component
         $request->voucher = $this->voucher;
         $request->scadenza = $this->scadenza;
         $clientService->inserisci($request);
+
+        $this->reset('name', 'voucher', 'scadenza');
     }
 
     public function render(ClientService $clientService)
     {
         return view('livewire.client.inserisci-ragazzo', [
-            'listaRagazzi' => $clientService->listaRagazziPaginate()
+            'listaRagazziPaginate' => $clientService->listaRagazziPaginate()
         ])
             ->title('inserisci ragazzo');
     }

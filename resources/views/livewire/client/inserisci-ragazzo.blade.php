@@ -78,7 +78,7 @@
             </tbody>
         </table>
 
-        {{ $listaRagazzi->links(data: ['scrollTo' => false]) }}
+        {{ $listaRagazziPaginate->links(data: ['scrollTo' => false]) }}
     </div>
 
 </div>

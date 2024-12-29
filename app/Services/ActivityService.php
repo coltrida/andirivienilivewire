@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Activity;
+use App\Models\Associa;
 
 class ActivityService
 {
@@ -18,5 +19,16 @@ class ActivityService
             'tipo' => $request->tipo,
             'cost' => $request->cost,
         ]);
+    }
+
+    public function inserisciAssociazioneAttivitaClient($request)
+    {
+        $activity = Activity::find($request->activity_id);
+        $activity->associaclients()->attach($request->clients);
+    }
+
+    public function eliminaAssociazioneAttivitaCliente($id)
+    {
+        Associa::find($id)->delete();
     }
 }

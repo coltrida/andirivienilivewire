@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Associa;
 use App\Models\Client;
 
 
@@ -32,5 +33,10 @@ class ClientService
         $client->voucher = $request->voucher;
         $client->scadenza = $request->scadenza;
         $client->save();
+    }
+
+    public function listaAssociazioniAttivitaClient()
+    {
+        return Associa::with('client', 'activity')->orderBy('activity_id')->paginate(5);
     }
 }

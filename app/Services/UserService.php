@@ -35,4 +35,11 @@ class UserService
             'password' => Hash::make($request->password)
         ]);
     }
+
+    public function associaOperatoreOresettimanali($request)
+    {
+        $user = User::find($request->user_id);
+        $user->oresettimanali = $request->oresettimanali;
+        $user->save();
+    }
 }

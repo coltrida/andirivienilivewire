@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456')
             ],
             [
-                'name' => 'cacao@cacao.it',
+                'name' => 'cacao',
                 'role' => 0,
                 'email' => 'cacao@cacao.it',
                 'oresettimanali' => 12,
@@ -32,11 +32,27 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456')
             ],
             [
-                'name' => 'cacao2@cacao.it',
+                'name' => 'cacao2',
                 'role' => 0,
                 'email' => 'cacao2@cacao.it',
                 'oresettimanali' => 14,
                 'oresaldo' => 116,
+                'password' => Hash::make('123456')
+            ],
+            [
+                'name' => 'cacao3',
+                'role' => 0,
+                'email' => 'cacao3@cacao.it',
+                'oresettimanali' => 13,
+                'oresaldo' => 113,
+                'password' => Hash::make('123456')
+            ],
+            [
+                'name' => 'cacao4',
+                'role' => 0,
+                'email' => 'cacao4@cacao.it',
+                'oresettimanali' => 14,
+                'oresaldo' => 114,
                 'password' => Hash::make('123456')
             ],
         ]);
