@@ -24,5 +24,7 @@ class TripService
         ]);
 
         $trip->clients()->attach($request->clients);
+
+        return $trip;
     }
 }

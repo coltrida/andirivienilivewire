@@ -4,6 +4,7 @@ namespace App\Livewire\Client;
 
 use App\Models\Client;
 use App\Services\ClientService;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -22,7 +23,7 @@ class ModificaRagazzo extends Component
         $this->scadenza = $client->scadenza;
     }
 
-    public function modifica(ClientService $clientService)
+    public function modifica(ClientService $clientService, LogService $logService)
     {
         $request = new Request();
         $request->name = $this->name;
@@ -31,6 +32,11 @@ class ModificaRagazzo extends Component
         $clientService->modifica($this->client, $request);
 
         session()->flash('status', 'ragazzo modificato');
+
+        $tipo = 'dati ragazzo modificati';
+        $data = 'modificato: '.$this->client->name.' con id: '.$this->client->id;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+
         $this->redirectRoute('client-inserisci', navigate: true);
     }
 

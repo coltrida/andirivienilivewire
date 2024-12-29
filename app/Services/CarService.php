@@ -13,7 +13,9 @@ class CarService
 
     public function elimina($id)
     {
-        Car::find($id)->delete();
+        $car = $carDaInviareALog = Car::find($id);
+        $car->delete();
+        return $carDaInviareALog;
     }
 
     public function inserisci($nomeVettura)

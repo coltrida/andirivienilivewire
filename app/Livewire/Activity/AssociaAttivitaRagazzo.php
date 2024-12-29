@@ -4,6 +4,7 @@ namespace App\Livewire\Activity;
 
 use App\Services\ActivityService;
 use App\Services\ClientService;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -16,21 +17,30 @@ class AssociaAttivitaRagazzo extends Component
     public $activity_id;
     public $clients = [];
 
-    public function inserisci(ActivityService $activityService)
+    public function inserisci(ActivityService $activityService, LogService $logService)
     {
         $request = new Request();
         $request->activity_id = $this->activity_id;
         $request->clients = $this->clients;
         $activityService->inserisciAssociazioneAttivitaClient($request);
 
+        $tipo = 'associa attività ragazzo';
+        $data = 'id Attività: '.$this->activity_id.'. lista id ragazzi: '. implode(",",$this->clients);
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+
         $this->reset('activity_id');
         $this->clients = [];
     }
 
-    public function elimina(ActivityService $activityService, $id)
+    public function elimina(ActivityService $activityService, LogService $logService, $id)
     {
         $activityService->eliminaAssociazioneAttivitaCliente($id);
         session()->flash('status', 'associazione eliminata');
+
+        $tipo = 'elimina associa attività ragazzo';
+        $data = 'id associazione '.$id.' eliminata ';
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+
         $this->redirectRoute('activity-client-associa', navigate: true);
     }
 
@@ -39,7 +49,7 @@ class AssociaAttivitaRagazzo extends Component
         return view('livewire.activity.associa-attivita-ragazzo', [
             'listaAttivita' => $activityService->listaAttivita(),
             'listaRagazzi' => $clientService->listaRagazzi(),
-            'listaAssociazioniAttivitaClient' => $clientService->listaAssociazioniAttivitaClient()
+            'listaAssociazioniAttivitaClientPaginate' => $clientService->listaAssociazioniAttivitaClientPaginate()
         ])
             ->title('associa attività ragazzo');
     }

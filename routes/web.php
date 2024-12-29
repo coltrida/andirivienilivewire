@@ -11,6 +11,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/modificaUser/{user}', \App\Livewire\User\ModificaUser::class)->name('user-modifica');
     Route::get('/presenzeOperatori', \App\Livewire\User\PresenzeOperatori::class)->name('presenze-operatori');
     Route::get('/associaOperatoreOre', \App\Livewire\User\AssociaOperatoreOresettimanali::class)->name('operatore-ore-associa');
+    Route::get('/presenzeAttivita', \App\Livewire\Client\PresenzeAttivita::class)->name('presenze-attivita');
 
 
     //------------------- CAR ----------------------//
@@ -26,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
     //------------------- TRIP ----------------------//
     Route::get('/inserisciChilometri', \App\Livewire\Trip\InserisciChilometri::class)->name('viaggio-inserisci');
+
+    //------------------- LOG ----------------------//
+    Route::get('/listaLog', \App\Livewire\Log\ListaLog::class)->name('log-lista');
 });
 
 

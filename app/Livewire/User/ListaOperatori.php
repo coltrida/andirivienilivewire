@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Services\LogService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -13,7 +14,7 @@ class ListaOperatori extends Component
     public $oresettimanali;
     public $password;
 
-    public function inserisci(UserService $userService)
+    public function inserisci(UserService $userService, LogService $logService)
     {
         $request = new Request();
         $request->name = $this->name;
@@ -21,6 +22,10 @@ class ListaOperatori extends Component
         $request->oresettimanali = $this->oresettimanali;
         $request->password = $this->password;
         $userService->inserisciUser($request);
+
+        $tipo = 'inserimento Operatore';
+        $data = 'Inserito operatore: '.$this->name;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('name', 'email', 'oresettimanali', 'password');
     }

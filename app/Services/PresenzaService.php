@@ -22,10 +22,12 @@ class PresenzaService
 
     public function eliminaPresenza($idPresenza)
     {
-        Presenze::find($idPresenza)->delete();
+        $presenza = $presenzaDaInviareALog = Presenze::find($idPresenza);
+        $presenza->delete();
+        return $presenzaDaInviareALog;
     }
 
-    public function listaPresenze($idUser)
+    public function listaPresenzePaginate($idUser)
     {
         return User::with('presenze')->find($idUser)->presenze()->paginate(3);
     }

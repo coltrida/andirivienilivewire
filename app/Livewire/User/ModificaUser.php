@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Models\User;
+use App\Services\LogService;
 use App\Services\UserService;
 use Livewire\Component;
 
@@ -19,16 +20,21 @@ class ModificaUser extends Component
         $this->user = $user;
     }
 
-    public function modifica(UserService $userService)
+    public function modifica(UserService $userService, LogService $logService)
     {
         $userService->modificaUser($this->user, $this->email, $this->oresettimanali);
         session()->flash('status', 'Utente modificato');
+
+        $tipo = 'modifica operatore';
+        $data = 'modificato: '.$this->user->name;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+
         $this->redirectRoute('lista-operatori', navigate: true);
     }
 
     public function render()
     {
         return view('livewire.user.modifica-user')
-            ->title('modifica user');
+            ->title('modifica user: '. $this->user->name);
     }
 }

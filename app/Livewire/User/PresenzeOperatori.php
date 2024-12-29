@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Services\LogService;
 use App\Services\PresenzaService;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -15,26 +16,33 @@ class PresenzeOperatori extends Component
     public $giorno;
     public $ore;
 
-    public function inserisci(PresenzaService $presenzaService)
+    public function inserisci(PresenzaService $presenzaService, LogService $logService)
     {
         $request = new Request();
         $request->giorno = $this->giorno;
         $request->ore = $this->ore;
         $presenzaService->inserisciPresenza($request);
 
-        $this->reset('giorno');
-        $this->reset('ore');
+        $tipo = 'inserimento presenze operatore';
+        $data = 'inserimento presenza del giorno: '.$this->giorno.' di ore: '. $this->ore;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+
+        $this->reset('giorno', 'ore');
     }
 
-    public function eliminaPresenza(PresenzaService $presenzaService, $idPresenza)
+    public function eliminaPresenza(PresenzaService $presenzaService, LogService $logService, $idPresenza)
     {
-        $presenzaService->eliminaPresenza($idPresenza);
+        $presenzaDaInviareALog = $presenzaService->eliminaPresenza($idPresenza);
+
+        $tipo = 'eliminazione presenze operatore';
+        $data = 'eliminata presenza del giorno: '.$presenzaDaInviareALog->giorno.' di ore: '. $presenzaDaInviareALog->ore;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
     }
 
     public function render(PresenzaService $presenzaService)
     {
         return view('livewire.user.presenze-operatori', [
-            'listaPresenze' => $presenzaService->listaPresenze(auth()->id())
+            'listaPresenzePaginate' => $presenzaService->listaPresenzePaginate(auth()->id())
         ])
             ->title('presenze operatori');
     }

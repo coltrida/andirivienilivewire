@@ -4,6 +4,7 @@ namespace App\Livewire\Client;
 
 use App\Services\ClientService;
 
+use App\Services\LogService;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -17,13 +18,17 @@ class InserisciRagazzo extends Component
     public $voucher;
     public $scadenza;
 
-    public function inserisci(ClientService $clientService)
+    public function inserisci(ClientService $clientService, LogService $logService)
     {
         $request = new Request();
         $request->name = $this->name;
         $request->voucher = $this->voucher;
         $request->scadenza = $this->scadenza;
         $clientService->inserisci($request);
+
+        $tipo = 'inserimento ragazzo';
+        $data = 'inserito: '.$this->name;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('name', 'voucher', 'scadenza');
     }

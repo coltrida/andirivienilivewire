@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Associa;
+use App\Models\AttivitaCliente;
 use App\Models\Client;
 
 
@@ -35,8 +36,13 @@ class ClientService
         $client->save();
     }
 
-    public function listaAssociazioniAttivitaClient()
+    public function listaAssociazioniAttivitaClientPaginate()
     {
         return Associa::with('client', 'activity')->orderBy('activity_id')->paginate(5);
+    }
+
+    public function listaAttivitaClientPaginate()
+    {
+        return AttivitaCliente::with('activity', 'client')->latest()->paginate(10);
     }
 }

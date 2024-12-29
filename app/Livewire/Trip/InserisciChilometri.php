@@ -4,6 +4,7 @@ namespace App\Livewire\Trip;
 
 use App\Services\CarService;
 use App\Services\ClientService;
+use App\Services\LogService;
 use App\Services\TripService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class InserisciChilometri extends Component
     public $giorno;
     public $clients = [];
 
-    public function inserisci(TripService $tripService)
+    public function inserisci(TripService $tripService, LogService $logService)
     {
         $request = new Request();
         $request->car_id = $this->car_id;
@@ -30,7 +31,11 @@ class InserisciChilometri extends Component
         $request->giorno = $this->giorno;
         $request->kmPercorsi = (int) $this->km_finali - (int) $this->km_iniziali;
         $request->clients = $this->clients;
-        $tripService->inserisciViaggio($request);
+        $trip = $tripService->inserisciViaggio($request);
+
+        $tipo = 'inserimento viaggio e km';
+        $data = 'inserito viaggio con id: '.$trip->id;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('car_id', 'user_id', 'km_iniziali', 'km_finali', 'giorno');
         $this->clients = [];
