@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
 
     //------------------- LOG ----------------------//
     Route::get('/listaLog', \App\Livewire\Log\ListaLog::class)->name('log-lista');
+
+    //------------------- STATISTICHE ----------------------//
+    Route::get('/statistichePresenzeRagazzi', \App\Livewire\Statistiche\PresenzeRagazzi::class)->name('statistiche-presenze-ragazzi');
 });
 
 

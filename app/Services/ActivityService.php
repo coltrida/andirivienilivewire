@@ -61,4 +61,9 @@ class ActivityService
             ]);
         }
     }
+
+    public function eliminaAttivitaClient($id)
+    {
+        AttivitaCliente::find($id)->delete();
+    }
 }
