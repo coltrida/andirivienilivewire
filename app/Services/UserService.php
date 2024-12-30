@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
+    public function infoUser($id)
+    {
+        return User::find($id);
+    }
+
     public function listaOperatori()
     {
         return User::where('role', '<>', 1)->orderBy('name')->get();

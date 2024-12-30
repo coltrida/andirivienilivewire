@@ -31,8 +31,14 @@ Route::middleware(['auth'])->group(function () {
     //------------------- LOG ----------------------//
     Route::get('/listaLog', \App\Livewire\Log\ListaLog::class)->name('log-lista');
 
+    //------------------- RICEVUTE ----------------------//
+    Route::get('/inserisciRicevuta', \App\Livewire\Ricevute\InserisciRicevuta::class)->name('ricevute-inserisci');
+
     //------------------- STATISTICHE ----------------------//
     Route::get('/statistichePresenzeRagazzi', \App\Livewire\Statistiche\PresenzeRagazzi::class)->name('statistiche-presenze-ragazzi');
+    Route::get('/statistichePresenzeOperatori', \App\Livewire\Statistiche\PresenzeOperatori::class)->name('statistiche-presenze-operatori');
+    Route::get('/statisticheChilometriVetture', \App\Livewire\Statistiche\ChilometriVetture::class)->name('statistiche-chilometri-vetture');
+    Route::get('/statisticheChilometriRagazzi', \App\Livewire\Statistiche\ChilometriRagazzi::class)->name('statistiche-chilometri-ragazzi');
 });
 
 

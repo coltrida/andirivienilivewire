@@ -22,4 +22,9 @@ class Client extends Model
         return $this->belongsToMany(Activity::class, 'activities_clients')
             ->where('tipo', 'orario')->withPivot('quantita', 'costo', 'mese', 'anno', 'giorno', 'id');
     }
+
+    public function trips()
+    {
+        return $this->belongsToMany(Trip::class);
+    }
 }

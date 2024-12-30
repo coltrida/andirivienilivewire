@@ -52,6 +52,6 @@ class PresenzeRagazzi extends Component
         return view('livewire.statistiche.presenze-ragazzi', [
             'listaRagazzi' => $clientService->listaRagazzi()
         ])
-            ->title('Statistiche Presenze Ragazzi');
+            ->title('Stat. Presenze Ragazzi');
     }
 }
