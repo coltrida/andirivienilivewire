@@ -34,6 +34,9 @@ Route::middleware(['auth'])->group(function () {
     //------------------- RICEVUTE ----------------------//
     Route::get('/inserisciRicevuta', \App\Livewire\Ricevute\InserisciRicevuta::class)->name('ricevute-inserisci');
 
+    //------------------- AGRICOLTURA ----------------------//
+    Route::get('/agricoltura', \App\Livewire\Agricoltura\Agricoltura::class)->name('agricoltura');
+
     //------------------- STATISTICHE ----------------------//
     Route::get('/statistichePresenzeRagazzi', \App\Livewire\Statistiche\PresenzeRagazzi::class)->name('statistiche-presenze-ragazzi');
     Route::get('/statistichePresenzeOperatori', \App\Livewire\Statistiche\PresenzeOperatori::class)->name('statistiche-presenze-operatori');
