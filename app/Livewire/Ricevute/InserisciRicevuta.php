@@ -4,6 +4,7 @@ namespace App\Livewire\Ricevute;
 
 use App\Services\LogService;
 use App\Services\RicevuteService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -39,13 +40,39 @@ class InserisciRicevuta extends Component
         $request->pivaCodfisc = $this->pivaCodfisc;
         $esito = $ricevuteService->inserisciRicevuta($request);
 
-        session()->flash('status', $esito);
+        session()->flash('status', $esito[0]);
 
         $tipo = 'inserimento ricevuta';
-        $data = $esito;
+        $data = $esito[0];
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
+        if ($esito[1]){
+            $ricevuta = $esito[1];
+            $pdf = Pdf::loadView('livewire.pdf.ricevuta', compact('ricevuta'));
+            return response()->streamDownload(function () use($pdf) {
+                echo  $pdf->stream();
+            }, $ricevuta->progressivo."-".$ricevuta->destinatario.".pdf");
+        }
+
         $this->redirectRoute('ricevute-inserisci', navigate: true);
+    }
+
+    public function elimina(RicevuteService $ricevuteService, LogService $logService, $id)
+    {
+        $ricevuteService->eliminaRicevuta($id);
+
+        $tipo = "eliminazione ricevuta";
+        $data = "ricevuta con id = $id eliminata";
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+    }
+
+    public function stampa(RicevuteService $ricevuteService, $id)
+    {
+        $ricevuta = $ricevuteService->ricevutaById($id);
+        $pdf = Pdf::loadView('livewire.pdf.ricevuta', compact('ricevuta'));
+        return response()->streamDownload(function () use($pdf) {
+            echo  $pdf->stream();
+        }, $ricevuta->progressivo."-".$ricevuta->destinatario.".pdf");
     }
 
     public function render(RicevuteService $ricevuteService)

@@ -7,6 +7,11 @@ use Carbon\Carbon;
 
 class RicevuteService
 {
+    public function ricevutaById($id)
+    {
+        return Ricevuta::find($id);
+    }
+
     public function listaRicevutePaginate()
     {
         return Ricevuta::latest()->paginate(10);
@@ -23,14 +28,14 @@ class RicevuteService
                 ['anno', $anno]
             ])->first();
             if ($ricevutaGiaPresente){
-                return 'numero progressivo già presente, ricevuta non inserita';
+                return ['numero progressivo già presente, ricevuta non inserita', ''];
             }
         } else {
             $ultimaRicevuta = Ricevuta::where('anno', $anno)->orderBy('progressivo', 'DESC')->first();
             $progressivo = $ultimaRicevuta ? $ultimaRicevuta->progressivo + 1 : 1;
         }
 
-        Ricevuta::create([
+        $ricevuta = Ricevuta::create([
             'destinatario' => $request->nominativo,
             'indirizzo' => $request->indirizzo,
             'citta' => $request->citta,
@@ -44,6 +49,11 @@ class RicevuteService
             'progressivo' => $progressivo,
         ]);
 
-        return 'ricevuta inserita';
+        return ["ricevuta con id = $ricevuta->id inserita", $ricevuta];
+    }
+
+    public function eliminaRicevuta($id)
+    {
+        Ricevuta::find($id)->delete();
     }
 }
