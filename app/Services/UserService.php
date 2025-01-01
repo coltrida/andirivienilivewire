@@ -22,11 +22,12 @@ class UserService
         User::find($idUser)->delete();
     }
 
-    public function modificaUser($user, $nuovaEmail, $nuoveOre)
+    public function modificaUser($request)
     {
-        $user->email = $nuovaEmail;
-        $user->oresettimanali = $nuoveOre;
-        $user->save();
+        $request->user->email = $request->email;
+        $request->user->oresaldo = $request->oresaldo;
+        $request->user->oresettimanali = $request->oresettimanali;
+        $request->user->save();
     }
 
     public function inserisciUser($request)

@@ -27,4 +27,14 @@ class Client extends Model
     {
         return $this->belongsToMany(Trip::class);
     }
+
+    public function presenzeAgricoltura()
+    {
+        return $this->hasMany(Agricoltura::class, 'user_id')->where('tipo', 'P');
+    }
+
+    public function assenzeAgricoltura()
+    {
+        return $this->hasMany(Agricoltura::class, 'user_id')->where('tipo', 'A');
+    }
 }

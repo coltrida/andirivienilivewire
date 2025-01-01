@@ -41,6 +41,15 @@ class InserisciChilometri extends Component
         $this->clients = [];
     }
 
+    public function elimina(TripService $tripService, LogService $logService, $id)
+    {
+        $tripService->elimina($id);
+
+        $tipo = 'eliminazione viaggio e km';
+        $data = 'eliminato viaggio con id: '.$id;
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+    }
+
     public function render(TripService $tripService, CarService $carService, UserService $userService, ClientService $clientService)
     {
         return view('livewire.trip.inserisci-chilometri', [

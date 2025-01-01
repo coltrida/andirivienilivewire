@@ -41,7 +41,7 @@ class ActivityService
 
     public function listaIdClientsFromIdActivity($idActivity)
     {
-        return Associa::where('activity_id', $idActivity)->get()->pluck('id')->toArray();
+        return Associa::where('activity_id', $idActivity)->get()->pluck('client_id')->toArray();
     }
 
     public function inserisciAttivitaClient($request)

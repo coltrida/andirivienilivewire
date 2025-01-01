@@ -54,6 +54,9 @@
                     Ore Settimanali
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Ore Saldo
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Azioni
                 </th>
             </tr>
@@ -72,6 +75,9 @@
                 </th>
                 <td class="px-6 py-4">
                     {{$item->oresettimanali}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$item->oresaldo}}
                 </td>
                 <td class="px-6 py-4 flex justify-center">
                     <button

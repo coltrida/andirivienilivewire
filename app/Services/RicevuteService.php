@@ -14,7 +14,7 @@ class RicevuteService
 
     public function listaRicevutePaginate()
     {
-        return Ricevuta::latest()->paginate(10);
+        return Ricevuta::latest()->paginate(5);
     }
 
     public function inserisciRicevuta($request)

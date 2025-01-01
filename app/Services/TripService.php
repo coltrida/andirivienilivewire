@@ -27,4 +27,9 @@ class TripService
 
         return $trip;
     }
+
+    public function elimina($id)
+    {
+        Trip::find($id)->delete();
+    }
 }

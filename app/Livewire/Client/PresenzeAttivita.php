@@ -43,6 +43,15 @@ class PresenzeAttivita extends Component
         $this->clients = [];
     }
 
+    public function elimina(ActivityService $activityService, LogService $logService, $id)
+    {
+        $activityService->eliminaAttivitaClient($id);
+
+        $tipo = 'eliminazione presenze attività';
+        $data = 'id Presenza - Attività: '.$id.' eliminata';
+        $logService->scriviLog(auth()->id(), $tipo, $data);
+    }
+
     public function render(ClientService $clientService, ActivityService $activityService)
     {
         return view('livewire.client.presenze-attivita', [

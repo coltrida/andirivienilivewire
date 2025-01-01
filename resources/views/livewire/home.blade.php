@@ -119,7 +119,7 @@
                         <a href="{{route('statistiche-presenze-operatori')}}" wire:navigate class="text-xl font-bold mb-4 block">Presenze Operatori</a>
                         <a href="{{route('statistiche-chilometri-vetture')}}" wire:navigate class="text-xl font-bold mb-4 block">Chilometri Vetture</a>
                         <a href="{{route('statistiche-chilometri-ragazzi')}}" wire:navigate class="text-xl font-bold mb-4 block">Chilometri Ragazzi</a>
-                        <a href="{{route('log-lista')}}" wire:navigate class="text-xl font-bold mb-4">Costi Ragazzi</a>
+                        <a href="#" wire:navigate class="text-xl font-bold mb-4">Costi Ragazzi</a>
 
                         <!-- Buttons -->
                         <div class="flex justify-end space-x-2">
@@ -167,7 +167,7 @@
 
 
             <a
-                href="{{route('agricoltura')}}" wire:navigate
+                href="{{route('agricoltura')}}"
                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
             >
                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::view('/', 'welcome');
 Route::get('/', \App\Livewire\Home::class)->name('home');
+Route::get('/calcoloSaldo', \App\Livewire\CalcoloSaldo::class)->name('calcolo-saldo');
 
 Route::middleware(['auth'])->group(function () {
     //------------------- USER ----------------------//
