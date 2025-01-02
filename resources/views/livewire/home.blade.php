@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="pt-3 sm:pt-5">
-                    <h2 class="text-xl font-semibold text-black dark:text-white">Inserisci Ragazzo</h2>
+                    <h2 class="text-xl font-semibold text-black dark:text-white">Inserisci Cliente</h2>
 
                 </div>
 
@@ -115,10 +115,10 @@
                      class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
                      x-transition>
                     <div class="items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20] lg:w-1/3 sm:w-full p-6">
-                        <a href="{{route('statistiche-presenze-ragazzi')}}" wire:navigate class="text-xl font-bold mb-4 block">Presenze Ragazzi</a>
+                        <a href="{{route('statistiche-presenze-ragazzi')}}" wire:navigate class="text-xl font-bold mb-4 block">Presenze Clienti</a>
                         <a href="{{route('statistiche-presenze-operatori')}}" wire:navigate class="text-xl font-bold mb-4 block">Presenze Operatori</a>
                         <a href="{{route('statistiche-chilometri-vetture')}}" wire:navigate class="text-xl font-bold mb-4 block">Chilometri Vetture</a>
-                        <a href="{{route('statistiche-chilometri-ragazzi')}}" wire:navigate class="text-xl font-bold mb-4 block">Chilometri Ragazzi</a>
+                        <a href="{{route('statistiche-chilometri-ragazzi')}}" wire:navigate class="text-xl font-bold mb-4 block">Chilometri Clienti</a>
                         <a href="#" wire:navigate class="text-xl font-bold mb-4">Costi Ragazzi</a>
 
                         <!-- Buttons -->

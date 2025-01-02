@@ -30,10 +30,10 @@ class CalcoloSaldo extends Component
                 }
 
                 //--------- se l'operatore è Matteo Butini gli devo togliere 20 ore di gennaio  --------
-                $operatore->oresaldo = $totaleOreAttese - $totaleOreLavorate;
+                /*$operatore->oresaldo = $totaleOreAttese - $totaleOreLavorate;
                 if ($operatore->name == "Matteo Butini"){
                     $operatore->oresaldo -= 20;
-                }
+                }*/
                 // --------------------------------------------------------------------------------------
 
                 $operatore->save();

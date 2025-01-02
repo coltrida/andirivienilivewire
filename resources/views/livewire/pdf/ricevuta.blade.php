@@ -19,7 +19,7 @@
         <tr>
             <td style="width: 25%; text-align: left">
                 <span style="color: gray; font-size: 14px">RICEVUTA NR.</span>  <br>
-                <span style="color: red"> <b>{{$ricevuta->progressivo}}</b> </span>
+                <span style="color: red"> <b>{{$ricevuta->progressivo}} / {{$ricevuta->anno}}</b> </span>
             </td>
             <td style="width: 30%; text-align: left">
                 <span style="color: gray; font-size: 14px">DATA</span>  <br>

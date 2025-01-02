@@ -51,7 +51,7 @@ class InserisciRicevuta extends Component
             $pdf = Pdf::loadView('livewire.pdf.ricevuta', compact('ricevuta'));
             return response()->streamDownload(function () use($pdf) {
                 echo  $pdf->stream();
-            }, $ricevuta->progressivo."-".$ricevuta->destinatario.".pdf");
+            }, $ricevuta->progressivo."-".$ricevuta->anno."-".$ricevuta->destinatario.".pdf");
         }
 
         $this->redirectRoute('ricevute-inserisci', navigate: true);
@@ -72,7 +72,7 @@ class InserisciRicevuta extends Component
         $pdf = Pdf::loadView('livewire.pdf.ricevuta', compact('ricevuta'));
         return response()->streamDownload(function () use($pdf) {
             echo  $pdf->stream();
-        }, $ricevuta->progressivo."-".$ricevuta->destinatario.".pdf");
+        }, $ricevuta->progressivo."-".$ricevuta->anno."-".$ricevuta->destinatario.".pdf");
     }
 
     public function render(RicevuteService $ricevuteService)

@@ -80,10 +80,7 @@ class Agricoltura extends Component
         }
         $agricolturaService->inserisciPresenze($request);
 
-        for ($i=1; $i<=31; $i++){
-            $nomeChiave = "valoriSelezionati" . $i;
-            $this->reset("$nomeChiave");
-        }
+        $this->resettaGiorni();
 
         $tipo = 'inserimento agricoltura';
         $data = 'inserite presenze per idClient: '.$this->client_id.' nel mese di '.$this->mese.' e anno '.$this->anno;
@@ -92,6 +89,14 @@ class Agricoltura extends Component
         $this->listaPresenze = $agricolturaService->visualizzaPresenze($request);
 
         $this->visualizzaPresenze = true;
+    }
+
+    public function resettaGiorni()
+    {
+        for ($i=1; $i<=31; $i++){
+            $nomeChiave = "valoriSelezionati" . $i;
+            $this->reset("$nomeChiave");
+        }
     }
 
     public function visualizza(AgricolturaService $agricolturaService)

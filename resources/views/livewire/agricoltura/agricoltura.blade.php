@@ -159,6 +159,7 @@
         const calendarEl = document.getElementById('calendar');
         const calendar = new FullCalendar.Calendar(calendarEl, {
             height: 520,
+            showNonCurrentDates: false,
             locale: 'it',
             firstDay: 1,
             initialView: 'dayGridMonth',
@@ -167,6 +168,7 @@
                 component.mese = currentDate.getMonth() + 1; // Mesi da 0 a 11, quindi aggiungi 1
                 component.anno = currentDate.getFullYear();
                 component.set('visualizzaPresenze', false);
+                component.resettaGiorni();
             },
 
             dayCellContent: function (arg) {
