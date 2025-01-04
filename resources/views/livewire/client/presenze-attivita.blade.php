@@ -1,20 +1,4 @@
 <div>
-
-    @if (session('status'))
-        <div class="alert alert-success">
-            <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    {{ session('status') }}
-                </div>
-            </div>
-
-        </div>
-    @endif
-
     <div class="grid gap-6 mb-6 md:grid-cols-7">
         <div>
             <select wire:model="activity_id" wire:change="attivitaSelezionata" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -134,6 +118,17 @@
 
         {{ $listaAttivitaClientPaginate->links(data: ['scrollTo' => false]) }}
     </div>
+
+        <script>
+            window.addEventListener('info', event => {
+                Swal.fire({
+                    icon: 'success',
+                    title: event.detail[0].title,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            });
+        </script>
 
 </div>
 

@@ -18,7 +18,7 @@ class Agricoltura extends Component
     public $client_id;
     public $presenzeClientSelezionato = [];
     public $assenzeClientSelezionato = [];
-    public $listaPresenze = [];
+    public $clienteConPresenze;
     public $anno;
     public $mese;
     public $valoriSelezionati1;
@@ -86,9 +86,13 @@ class Agricoltura extends Component
         $data = 'inserite presenze per idClient: '.$this->client_id.' nel mese di '.$this->mese.' e anno '.$this->anno;
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
-        $this->listaPresenze = $agricolturaService->visualizzaPresenze($request);
+        $this->clienteConPresenze = $agricolturaService->clienteConPresenze($request);
 
         $this->visualizzaPresenze = true;
+
+        $this->dispatch('info', [
+            'title' => 'Inserita presenza/assenza',
+        ]);
     }
 
     public function resettaGiorni()
@@ -105,7 +109,7 @@ class Agricoltura extends Component
         $request->client_id = $this->client_id;
         $request->mese = $this->mese;
         $request->anno = $this->anno;
-        $this->listaPresenze = $agricolturaService->visualizzaPresenze($request);
+        $this->clienteConPresenze = $agricolturaService->clienteConPresenze($request);
         $this->visualizzaPresenze = true;
     }
 
@@ -143,7 +147,11 @@ class Agricoltura extends Component
         $request->client_id = $this->client_id;
         $request->mese = $this->mese;
         $request->anno = $this->anno;
-        $this->listaPresenze = $agricolturaService->visualizzaPresenze($request);
+        $this->clienteConPresenze = $agricolturaService->clienteConPresenze($request);
+
+        $this->dispatch('info', [
+            'title' => 'eliminata presenza/assenza',
+        ]);
     }
 
     public function render(ClientService $clientService)

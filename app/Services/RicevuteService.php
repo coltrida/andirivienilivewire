@@ -12,9 +12,9 @@ class RicevuteService
         return Ricevuta::find($id);
     }
 
-    public function listaRicevutePaginate()
+    public function listaRicevutePaginate($testo)
     {
-        return Ricevuta::latest()->paginate(5);
+        return Ricevuta::where('destinatario', 'like', '%'.$testo.'%')->latest()->paginate(5);
     }
 
     public function inserisciRicevuta($request)

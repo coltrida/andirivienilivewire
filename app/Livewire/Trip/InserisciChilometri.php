@@ -39,6 +39,10 @@ class InserisciChilometri extends Component
 
         $this->reset('car_id', 'user_id', 'km_iniziali', 'km_finali', 'giorno');
         $this->clients = [];
+
+        $this->dispatch('info', [
+            'title' => 'Inserito viaggio e chilometri',
+        ]);
     }
 
     public function elimina(TripService $tripService, LogService $logService, $id)
@@ -48,6 +52,10 @@ class InserisciChilometri extends Component
         $tipo = 'eliminazione viaggio e km';
         $data = 'eliminato viaggio con id: '.$id;
         $logService->scriviLog(auth()->id(), $tipo, $data);
+
+        $this->dispatch('info', [
+            'title' => 'Eliminato viaggio e chilometri',
+        ]);
     }
 
     public function render(TripService $tripService, CarService $carService, UserService $userService, ClientService $clientService)

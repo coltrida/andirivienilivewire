@@ -39,12 +39,21 @@ class AgricolturaService
         Agricoltura::find($id)->delete();
     }
 
-    public function visualizzaPresenze($request)
+    public function clienteConPresenze($request)
     {
-        return Agricoltura::where([
+        /*dd(Agricoltura::where([
             ['user_id', $request->client_id],
             ['anno', $request->anno],
             ['mese', $request->mese],
-        ])->get();
+        ])->get());*/
+
+        /*dd(Client::with(['agricoltura' => function($a) use ($request){
+            $a->where('anno', $request->anno)->where('mese', $request->mese);
+        }])->find($request->client_id));*/
+
+
+        return Client::with(['agricoltura' => function($a) use ($request){
+            $a->where('anno', $request->anno)->where('mese', $request->mese);
+        }])->find($request->client_id);
     }
 }

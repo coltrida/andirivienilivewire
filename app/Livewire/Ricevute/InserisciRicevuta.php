@@ -24,6 +24,7 @@ class InserisciRicevuta extends Component
     public $indirizzo;
     public $cap;
     public $pivaCodfisc;
+    public $testo;
 
     public function inserisci(RicevuteService $ricevuteService, LogService $logService)
     {
@@ -40,13 +41,15 @@ class InserisciRicevuta extends Component
         $request->pivaCodfisc = $this->pivaCodfisc;
         $esito = $ricevuteService->inserisciRicevuta($request);
 
-        session()->flash('status', $esito[0]);
-
         $tipo = 'inserimento ricevuta';
         $data = $esito[0];
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
         if ($esito[1]){
+            $this->reset();
+            $this->dispatch('info', [
+                'title' => $esito[0],
+            ]);
             $ricevuta = $esito[1];
             $pdf = Pdf::loadView('livewire.pdf.ricevuta', compact('ricevuta'));
             return response()->streamDownload(function () use($pdf) {
@@ -54,7 +57,9 @@ class InserisciRicevuta extends Component
             }, $ricevuta->progressivo."-".$ricevuta->anno."-".$ricevuta->destinatario.".pdf");
         }
 
-        $this->redirectRoute('ricevute-inserisci', navigate: true);
+        $this->dispatch('info', [
+            'title' => $esito[0],
+        ]);
     }
 
     public function elimina(RicevuteService $ricevuteService, LogService $logService, $id)
@@ -64,6 +69,10 @@ class InserisciRicevuta extends Component
         $tipo = "eliminazione ricevuta";
         $data = "ricevuta con id = $id eliminata";
         $logService->scriviLog(auth()->id(), $tipo, $data);
+
+        $this->dispatch('info', [
+            'title' => "Ricevuta con id = $id eliminata",
+        ]);
     }
 
     public function stampa(RicevuteService $ricevuteService, $id)
@@ -75,10 +84,23 @@ class InserisciRicevuta extends Component
         }, $ricevuta->progressivo."-".$ricevuta->anno."-".$ricevuta->destinatario.".pdf");
     }
 
+
+    /*public function updatedTesto()
+    {
+        if (strlen($this->testo) >= 2) {
+            $this->performSearch();
+        }
+    }
+
+    public function performSearch()
+    {
+        dd('ciao');
+    }*/
+
     public function render(RicevuteService $ricevuteService)
     {
         return view('livewire.ricevute.inserisci-ricevuta', [
-            'listaRicevutePaginate' => $ricevuteService->listaRicevutePaginate()
+            'listaRicevutePaginate' => $ricevuteService->listaRicevutePaginate($this->testo)
         ])
             ->title('inserisci ricevuta');
     }

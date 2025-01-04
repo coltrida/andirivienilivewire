@@ -1,82 +1,65 @@
 <div>
-
-    @if (session('status'))
-        <div class="alert alert-success">
-            <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    {{ session('status') }}
-                </div>
-            </div>
-
+    <div class="grid gap-6 mb-6 md:grid-cols-7">
+        <div class="md:col-span-1">
+            <select wire:model="car_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Vettura</option>
+                @foreach($listaVetture as $car)
+                    <option value="{{$car->id}}">{{$car->name}}</option>
+                @endforeach
+            </select>
         </div>
-    @endif
+        <div class="md:col-span-1">
+            <input wire:model="km_iniziali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Km Iniziali" />
+        </div>
+        <div class="md:col-span-1">
+            <input wire:model="km_finali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Km Finali" />
+        </div>
+        <div class="md:col-span-1">
+            <select wire:model="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Operatore</option>
+                @foreach($listaOperatori as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="md:col-span-1">
+            <input wire:model="giorno" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
+        </div>
 
+        <div x-data="{ open: false }">
+            <!-- Finestra fissa -->
+            <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+                <div class="bg-black rounded-lg w-96 h-72 overflow-hidden shadow-lg">
+                    <!-- Header della finestra -->
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <h2 class="text-lg font-semibold">Lista Clienti</h2>
+                        <button @click="open = false" class="text-red-500">Chiudi</button>
+                    </div>
 
-        <div class="grid gap-6 mb-6 md:grid-cols-7">
-            <div class="md:col-span-1">
-                <select wire:model="car_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected value="">Vettura</option>
-                    @foreach($listaVetture as $car)
-                        <option value="{{$car->id}}">{{$car->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="md:col-span-1">
-                <input wire:model="km_iniziali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Km Iniziali" />
-            </div>
-            <div class="md:col-span-1">
-                <input wire:model="km_finali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Km Finali" />
-            </div>
-            <div class="md:col-span-1">
-                <select wire:model="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected value="">Operatore</option>
-                    @foreach($listaOperatori as $user)
-                        <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="md:col-span-1">
-                <input wire:model="giorno" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
-            </div>
-
-            <div x-data="{ open: false }">
-                <!-- Finestra fissa -->
-                <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-                    <div class="bg-black rounded-lg w-96 h-72 overflow-hidden shadow-lg">
-                        <!-- Header della finestra -->
-                        <div class="flex justify-between items-center p-4 border-b">
-                            <h2 class="text-lg font-semibold">Lista Clienti</h2>
-                            <button @click="open = false" class="text-red-500">Chiudi</button>
-                        </div>
-
-                        <!-- Lista con scorrimento -->
-                        <div class="p-4 overflow-y-auto h-56">
-                            <ul>
-                                @foreach($listaRagazzi as $client)
-                                    <div class="flex items-center mb-4">
-                                        <input wire:model="clients" id="default-checkbox-{{$client->id}}" type="checkbox" value="{{$client->id}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="default-checkbox-{{$client->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$client->name}}</label>
-                                    </div>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <!-- Lista con scorrimento -->
+                    <div class="p-4 overflow-y-auto h-56">
+                        <ul>
+                            @foreach($listaRagazzi as $client)
+                                <div class="flex items-center mb-4">
+                                    <input wire:model="clients" id="default-checkbox-{{$client->id}}" type="checkbox" value="{{$client->id}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="default-checkbox-{{$client->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$client->name}}</label>
+                                </div>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-                <button @click="open = true" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Sel. Clienti
-                </button>
             </div>
-
-            <div>
-                <button wire:click="inserisci" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Inserisci
-                </button>
-            </div>
+            <button @click="open = true" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Sel. Clienti
+            </button>
         </div>
+
+        <div>
+            <button wire:click="inserisci" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Inserisci
+            </button>
+        </div>
+    </div>
 
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -149,6 +132,17 @@
 
         {{ $listaTuttiViaggi->links(data: ['scrollTo' => false]) }}
     </div>
+
+        <script>
+            window.addEventListener('info', event => {
+                Swal.fire({
+                    icon: 'success',
+                    title: event.detail[0].title,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            });
+        </script>
 
 </div>
 

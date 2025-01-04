@@ -30,18 +30,23 @@ class AssociaAttivitaRagazzo extends Component
 
         $this->reset('activity_id');
         $this->clients = [];
+
+        $this->dispatch('info', [
+            'title' => 'Associazione Attività Cliente inserita',
+        ]);
     }
 
     public function elimina(ActivityService $activityService, LogService $logService, $id)
     {
         $activityService->eliminaAssociazioneAttivitaCliente($id);
-        session()->flash('status', 'associazione eliminata');
 
         $tipo = 'elimina associa attività ragazzo';
         $data = 'id associazione '.$id.' eliminata ';
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
-        $this->redirectRoute('activity-client-associa', navigate: true);
+        $this->dispatch('info', [
+            'title' => 'Associazione Attività Cliente eliminata',
+        ]);
     }
 
     public function render(ActivityService $activityService, ClientService $clientService)

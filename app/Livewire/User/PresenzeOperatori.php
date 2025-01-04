@@ -28,6 +28,10 @@ class PresenzeOperatori extends Component
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('giorno', 'ore');
+
+        $this->dispatch('info', [
+            'title' => 'Presenza Inserita',
+        ]);
     }
 
     public function eliminaPresenza(PresenzaService $presenzaService, LogService $logService, $idPresenza)
@@ -37,6 +41,10 @@ class PresenzeOperatori extends Component
         $tipo = 'eliminazione presenze operatore';
         $data = 'eliminata presenza del giorno: '.$presenzaDaInviareALog->giorno.' di ore: '. $presenzaDaInviareALog->ore;
         $logService->scriviLog(auth()->id(), $tipo, $data);
+
+        $this->dispatch('info', [
+            'title' => 'Presenza eliminata',
+        ]);
     }
 
     public function render(PresenzaService $presenzaService)

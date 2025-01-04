@@ -41,6 +41,10 @@ class PresenzeAttivita extends Component
 
         $this->reset('activity_id', 'giorno', 'quantita', 'note');
         $this->clients = [];
+
+        $this->dispatch('info', [
+            'title' => 'Inserita Presenza Attività',
+        ]);
     }
 
     public function elimina(ActivityService $activityService, LogService $logService, $id)
@@ -50,6 +54,10 @@ class PresenzeAttivita extends Component
         $tipo = 'eliminazione presenze attività';
         $data = 'id Presenza - Attività: '.$id.' eliminata';
         $logService->scriviLog(auth()->id(), $tipo, $data);
+
+        $this->dispatch('info', [
+            'title' => 'Eliminata Presenza Attività',
+        ]);
     }
 
     public function render(ClientService $clientService, ActivityService $activityService)

@@ -66,5 +66,16 @@
         {{ $listaPresenzePaginate->links(data: ['scrollTo' => false]) }}
     </div>
 
+    <script>
+        window.addEventListener('info', event => {
+            Swal.fire({
+                icon: 'success',
+                title: event.detail[0].title,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        });
+    </script>
+
 </div>
 

@@ -37,4 +37,9 @@ class Client extends Model
     {
         return $this->hasMany(Agricoltura::class, 'user_id')->where('tipo', 'A');
     }
+
+    public function agricoltura()
+    {
+        return $this->hasMany(Agricoltura::class, 'user_id');
+    }
 }

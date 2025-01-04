@@ -14,13 +14,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/associaOperatoreOre', \App\Livewire\User\AssociaOperatoreOresettimanali::class)->name('operatore-ore-associa');
     Route::get('/presenzeAttivita', \App\Livewire\Client\PresenzeAttivita::class)->name('presenze-attivita');
 
-
     //------------------- CAR ----------------------//
     Route::get('/inserisciVettura', \App\Livewire\Car\InserisciVettura::class)->name('car-inserisci');
 
     //------------------- CLIENT ----------------------//
     Route::get('/inserisciRagazzo', \App\Livewire\Client\InserisciRagazzo::class)->name('client-inserisci');
-    Route::get('/modificaRagazzo/{client}', \App\Livewire\Client\ModificaRagazzo::class)->name('client-modifica');
 
     //------------------- ATTIVITA ----------------------//
     Route::get('/inserisciAttivita', \App\Livewire\Activity\InserisciAttivita::class)->name('activity-inserisci');
@@ -44,9 +42,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/statisticheChilometriVetture', \App\Livewire\Statistiche\ChilometriVetture::class)->name('statistiche-chilometri-vetture');
     Route::get('/statisticheChilometriRagazzi', \App\Livewire\Statistiche\ChilometriRagazzi::class)->name('statistiche-chilometri-ragazzi');
 });
-
-
-
 
 
 

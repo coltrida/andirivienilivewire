@@ -19,18 +19,23 @@ class InserisciVettura extends Component
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('nomeVettura');
+
+        $this->dispatch('info', [
+            'title' => 'Inserita Vettura',
+        ]);
     }
 
     public function elimina(CarService $carService, LogService $logService, $id)
     {
         $carDaInviareALog = $carService->elimina($id);
-        session()->flash('status', 'vettura eliminata');
 
         $tipo = 'eliminazione vettura';
         $data = 'vettura: '.$carDaInviareALog->name.' eliminata';
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
-        $this->redirectRoute('car-inserisci', navigate: true);
+        $this->dispatch('info', [
+            'title' => 'Eliminata Vettura',
+        ]);
     }
 
     public function render(CarService $carService)

@@ -24,6 +24,10 @@ class AssociaOperatoreOresettimanali extends Component
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('user_id', 'oresettimanali');
+
+        $this->dispatch('info', [
+            'title' => 'Inserita Associazione Operatore Ore',
+        ]);
     }
 
     public function render(UserService $userService)

@@ -30,6 +30,10 @@ class InserisciAttivita extends Component
         $logService->scriviLog(auth()->id(), $tipo, $data);
 
         $this->reset('name', 'tipo', 'cost');
+
+        $this->dispatch('info', [
+            'title' => 'Inserita attività',
+        ]);
     }
 
     public function render(ActivityService $activityService)
